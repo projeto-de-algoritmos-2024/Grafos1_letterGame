@@ -44,6 +44,8 @@ function createAdjacencyList() {
 }
 
 function bfs(fromWord, toWord) {
+  fromWord = fromWord.toUpperCase();
+  toWord = toWord.toUpperCase();
   if (!(fromWord in adjList) || !(toWord in adjList)) {
     console.log("One or both words not in dictionary.");
     return;
