@@ -1,4 +1,6 @@
 const fs = require("fs");
+const { Graph } = require("graphology");
+const { write: writeGEXF } = require("graphology-gexf");
 
 const WORD_LIST = "12dicts_words.txt";
 const WORD_LEN = 3;
@@ -42,8 +44,6 @@ function createAdjacencyList() {
 }
 
 function bfs(fromWord, toWord) {
-  fromWord = fromWord.toUpperCase();
-  toWord = toWord.toUpperCase();
   if (!(fromWord in adjList) || !(toWord in adjList)) {
     console.log("One or both words not in dictionary.");
     return;
@@ -79,6 +79,32 @@ function bfs(fromWord, toWord) {
   console.log("Cannot connect!");
 }
 
+function generateGraph() {
+  const graph = new Graph();
+
+  allWords.forEach((word) => {
+    graph.addNode(word, { label: word });
+  });
+
+  for (const word in adjList) {
+    adjList[word].forEach((neighbor) => {
+      if (!graph.hasEdge(word, neighbor)) {
+        graph.addEdge(word, neighbor);
+      }
+    });
+  }
+
+  return graph;
+}
+
+function exportToGEXF(graph, filename) {
+  const gexfData = writeGEXF(graph);
+  fs.writeFileSync(filename, gexfData);
+  console.log(`Graph saved to ${filename}`);
+}
+
 loadDictionary();
 createAdjacencyList();
 bfs("CAT", "DOG");
+const graph = generateGraph();
+exportToGEXF(graph, "graph.gexf");
