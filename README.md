@@ -14,6 +14,8 @@
 
 O objetivo do projeto **LetterGame** é construir uma ferramenta para manipulação e análise de grafos de palavras, onde cada palavra é representada como um nó e cada aresta representa uma conexão entre duas palavras que diferem por apenas uma letra. Esse tipo de grafo é útil para estudar relações linguísticas, resolver quebra-cabeças de palavras e analisar cadeias de transformações lexicais.
 
+[Vídeo da Apresentação](https://youtu.be/khWnvXpxK4c)
+
 ### Como Funciona
 1. **Carregamento do Dicionário**:
    - O projeto carrega uma lista de palavras de um arquivo (`12dicts_words.txt`) e filtra palavras com um comprimento específico (ex.: três letras).
